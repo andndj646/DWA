@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- 必须放在最前面，确保浏览器第一时间识别编码 -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>去中心化世界宣言</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+      line-height: 1.8;
+      color: #222;
+      background: #f8f9fa;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.2em;
+      color: #1a1a1a;
+      margin-bottom: 30px;
+      border-bottom: 3px solid #007BFF;
+      padding-bottom: 15px;
+    }
+    h2, h3 {
+      color: #2c3e50;
+      margin: 25px 0 15px;
+    }
+    p, li {
+      text-align: justify;
+    }
+    ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    li {
+      margin: 8px 0;
+    }
+    .highlight {
+      background: #e8f5ff;
+      padding: 18px;
+      border-left: 4px solid #007BFF;
+      margin: 20px 0;
+      font-style: italic;
+      color: #333;
+    }
+    .form-group {
+      margin: 16px 0;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #333;
+    }
+    input[type="text"] {
+      width: 100%;
+      max-width: 500px;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+      background: #fdfdfd;
+      color: #000;
+    }
+    button {
+      background: #007BFF;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin: 10px 5px;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    button.secondary {
+      background: #6c757d;
+    }
+    button.secondary:hover {
+      background: #545b62;
+    }
+
+    /* 语言切换 */
+    .lang-switch {
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    .lang-switch button {
+      padding: 6px 12px;
+      margin-left: 8px;
+      border: none;
+      border-radius: 4px;
+      background: #6c757d;
+      color: white;
+      cursor: pointer;
+    }
+    .lang-switch button.active {
+      background: #007BFF;
+      font-weight: bold;
+    }
+
+    /* 捐赠模块 */
+    .donate-section {
+      margin: 40px 0;
+      padding: 25px;
+      background: #f0f8ff;
+      border: 1px solid #007BFF;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .donate-section h3 {
+      color: #2c3e50;
+    }
+    .donate-section p {
+      color: #555;
+      margin: 12px 0;
+    }
+    .donate-address {
+      margin: 15px auto;
+      max-width: 600px;
+    }
+    .donate-address input {
+      font-family: monospace;
+      letter-spacing: 0.5px;
+      background: #fff;
+      border-color: #aaa;
+    }
+
+    /* 签名表单 */
+    .signature-form {
+      margin-top: 40px;
+      padding: 30px;
+      background: #f9f9f9;
+      border-radius: 10px;
+    }
+
+    /* 统计 */
+    .stats {
+      text-align: center;
+      margin: 30px 0;
+      padding: 20px;
+      background: #e8f5ff;
+      border: 1px dashed #007BFF;
+      border-radius: 8px;
+    }
+    .stats-number {
+      font-size: 2.3em;
+      font-weight: bold;
+      color: #007BFF;
+      margin: 8px 0;
+    }
+
+    /* 页脚 */
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #777;
+      font-size: 0.9em;
+    }
+
+    /* 多语言控制 */
+    [data-lang] { display: none; }
+    [data-lang="zh"] { display: block; }
+    [data-lang="en"] { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 语言切换 -->
+    <div class="lang-switch">
+      <button id="btn-zh" class="active">中文</button>
+      <button id="btn-en">English</button>
+    </div>
+
+    <!-- 标题 -->
+    <h1 id="title">去中心化世界宣言</h1>
+
+    <!-- 统计 -->
+    <div class="stats">
+      <div id="stats-title">全球签署人数</div>
+      <div class="stats-number" id="total-count">0</div>
+      <div id="breakdown-text">已签署: 0人</div>
+    </div>
+
+    <!-- 正文 -->
+    <div id="content">
+      <div data-lang="zh">
+        <p>我们曾相信，互联网是自由的灯塔。</p>
+        <p>它承诺打破壁垒，让知识无界流通；它许诺赋权个体，让沉默者发出声音；它描绘一个扁平的世界，人人皆可创造、连接与共享。三十年来，它确实改变了人类文明的进程。</p>
+        <p>但今天，这座灯塔的光芒正被阴影遮蔽。</p>
+
+        <h2>📉 现状：被垄断的自由</h2>
+        <p>你每一次点赞、评论、停留，都被记录、分析、打包出售。你创作的内容，平台可以随意限流、删除。你信任的搜索引擎，悄悄为你定制“信息茧房”。</p>
+
+        <h2>💡 愿景：去中心化的未来</h2>
+        <p>我们呼吁一个**去中心化**的世界。在这里：</p>
+        <ul>
+          <li>你的数据属于你，你可以决定谁可以访问。</li>
+          <li>你的身份是自主的，无需依赖任何中心化平台。</li>
+          <li>平台由社区共同拥有和治理。</li>
+          <li>网络协议开放透明，创新不被许可限制。</li>
+        </ul>
+
+        <div class="highlight">
+          我们不是反对技术，而是反对技术的滥用；不是拒绝连接，而是追求更公平的连接。
+        </div>
+      </div>
+
+      <div data-lang="en">
+        <p>We once believed the internet was a lighthouse of freedom.</p>
+        <p>It promised to break barriers, allowing knowledge to flow freely; it empowered individuals and gave voice to the silent. For decades, it transformed civilization.</p>
+        <p>But today, the light of this lighthouse is being obscured.</p>
+
+        <h2>📉 Reality: Monopolized Freedom</h2>
+        <p>Every like, comment, and pause is tracked, analyzed, and sold. Your creations can be throttled or deleted. Search engines build "filter bubbles" to control what you see.</p>
+
+        <h2>💡 Vision: A Decentralized Future</h2>
+        <p>We call for a <strong>decentralized</strong> world where:</p>
+        <ul>
+          <li>Your data belongs to you—you control access.</li>
+          <li>Your identity is self-owned, not platform-dependent.</li>
+          <li>Platforms are community-governed.</li>
+          <li>Protocols are open and innovation is permissionless.</li>
+        </ul>
+
+        <div class="highlight">
+          We are not against technology, but its abuse; not against connection, but for fairer connection.
+        </div>
+      </div>
+    </div>
+
+    <!-- 签署表单 -->
+    <div class="signature-form">
+      <h3 id="sign-title">签署宣言</h3>
+      <p id="sign-desc">输入您的名字或匿名支持去中心化未来。</p>
+
+      <div class="form-group">
+        <label for="name" id="name-label">您的名字（可选）：</label>
+        <input type="text" id="name" placeholder="留空则为匿名" />
+      </div>
+
+      <button onclick="signManifesto()">签署并提交</button>
+      <button class="secondary" onclick="toggleSignatures()">
+        查看所有签署者
+      </button>
+    </div>
+
+    <!-- 签名列表 -->
+    <div class="signatures" id="signatures" style="display:none; margin-top:20px;">
+      <h3>已签署名单</h3>
+      <div id="sigs-list"></div>
+    </div>
+
+    <!-- 捐赠模块 -->
+    <div class="donate-section">
+      <h3 id="donate-title">支持我们</h3>
+      <p id="donate-desc">您的捐赠将用于推广去中心化技术与开源开发。</p>
+
+      <div class="donate-address">
+        <label for="ltc-address">莱特币 (LTC) 地址：</label>
+        <input 
+          type="text" 
+          id="ltc-address" 
+          value="ltc1qv6x6pwnhffmukx80xdkqc22yutjvl9cnf9xkcg" 
+          readonly 
+          onclick="this.select()"
+        />
+        <button onclick="copyAddress()">📋 复制地址</button>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2025 去中心化世界宣言 | 本项目开源且无中心服务器 | 所有数据存储在您的浏览器中</p>
+    </footer>
+  </div>
+
+  <script>
+    // 初始化数据
+    function init() {
+      const stats = JSON.parse(localStorage.getItem('manifesto-stats') || '{"total":0}');
+      const names = JSON.parse(localStorage.getItem('manifesto-signed-names') || '[]');
+      return {
+        stats,
+        signedNames: new Set(names.map(n => n.toLowerCase().trim()))
+      };
+    }
+
+    let { stats, signedNames } = init();
+
+    function saveData() {
+      localStorage.setItem('manifesto-stats', JSON.stringify(stats));
+      localStorage.setItem('manifesto-signed-names', JSON.stringify([...signedNames]));
+      updateStats();
+    }
+
+    function updateStats() {
+      document.getElementById('total-count').textContent = stats.total;
+      const lang = getLang();
+      document.getElementById('breakdown-text').textContent = 
+        lang === 'zh' ? `已签署: ${stats.total}人` : `Total Signatures: ${stats.total}`;
+    }
+
+    function getLang() {
+      return localStorage.getItem('manifesto-lang') || 'zh';
+    }
+
+    function setLang(lang) {
+      localStorage.setItem('manifesto-lang', lang);
+      document.querySelectorAll('[data-lang]').forEach(el => {
+        el.style.display = el.getAttribute('data-lang') === lang ? 'block' : 'none';
+      });
+
+      const isZh = lang === 'zh';
+      document.getElementById('title').textContent = isZh ? '去中心化世界宣言' : 'Decentralized World Manifesto';
+      document.getElementById('stats-title').textContent = isZh ? '全球签署人数' : 'Global Signatures';
+      document.getElementById('sign-title').textContent = isZh ? '签署宣言' : 'Sign the Manifesto';
+      document.getElementById('sign-desc').textContent = isZh 
+        ? '输入您的名字或匿名支持去中心化未来。'
+        : 'Enter your name or support anonymously.';
+      document.getElementById('donate-title').textContent = isZh ? '支持我们' : 'Support Us';
+      document.getElementById('donate-desc').textContent = isZh 
+        ? '您的捐赠将用于推广去中心化技术与开源开发。'
+        : 'Your donation supports decentralized tech and open-source development.';
+      document.getElementById('name-label').textContent = isZh ? '您的名字（可选）：' : 'Your Name (Optional):';
+
+      updateStats();
+    }
+
+    function copyAddress() {
+      const addr = document.getElementById('ltc-address');
+      addr.select();
+      document.execCommand('copy');
+      alert(getLang() === 'zh' ? '莱特币地址已复制！' : 'LTC address copied!');
+    }
+
+    function signManifesto() {
+      const name = document.getElementById('name').value.trim();
+      const normalizedName = name.toLowerCase();
+
+      if (name && signedNames.has(normalizedName)) {
+        alert(getLang() === 'zh' ? '您已签署过，请勿重复签署。' : 'You have already signed.');
+        return;
+      }
+
+      // 保存签名
+      const signatures = JSON.parse(localStorage.getItem('manifesto-signatures') || '[]');
+      signatures.push({
+        name,
+        timestamp: new Date().toISOString()
+      });
+      localStorage.setItem('manifesto-signatures', JSON.stringify(signatures));
+
+      // 更新统计
+      if (name) signedNames.add(normalizedName);
+      stats.total += 1;
+      saveData();
+
+      alert(getLang() === 'zh' ? '感谢您的签署！' : 'Thank you for signing!');
+      document.getElementById('name').value = '';
+      renderSignatures();
+    }
+
+    function renderSignatures() {
+      const list = document.getElementById('sigs-list');
+      const sigs = JSON.parse(localStorage.getItem('manifesto-signatures') || '[]');
+      list.innerHTML = '';
+
+      sigs.forEach(sig => {
+        const item = document.createElement('div');
+        item.className = 'sig-item';
+        const displayName = sig.name ? sig.name : (getLang() === 'zh' ? '匿名用户' : 'Anonymous');
+        const timeLabel = getLang() === 'zh' ? '时间' : 'Time';
+        item.innerHTML = `<strong>${displayName}</strong> <span class="sig-meta">${timeLabel}: ${new Date(sig.timestamp).toLocaleString()}</span>`;
+        list.appendChild(item);
+      });
+    }
+
+    function toggleSignatures() {
+      const sigs = document.getElementById('signatures');
+      sigs.style.display = sigs.style.display === 'none' ? 'block' : 'none';
+      if (sigs.style.display === 'block') renderSignatures();
+    }
+
+    // 语言切换
+    document.getElementById('btn-zh').onclick = () => {
+      setLang('zh');
+      document.getElementById('btn-zh').classList.add('active');
+      document.getElementById('btn-en').classList.remove('active');
+    };
+    document.getElementById('btn-en').onclick = () => {
+      setLang('en');
+      document.getElementById('btn-en').classList.add('active');
+      document.getElementById('btn-zh').classList.remove('active');
+    };
+
+    // 初始化
+    window.onload = () => {
+      const lang = getLang();
+      setLang(lang);
+      document.getElementById(`btn-${lang}`).classList.add('active');
+      updateStats();
+      renderSignatures();
+    };
+  </script>
+</body>
+</html>
