@@ -5,24 +5,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Blog – Invisible Builders</title>
   <style>
-    body{font-family:sans-serif;background:#0d0d12;color:#e6e6ff;margin:0;padding:0;line-height:1.6}
-    header{background:#1a1a2e;padding:2rem;text-align:center}
-    h1{color:#8ac926}
-    nav{background:#16213e;padding:0.8rem;text-align:center}
-    nav a{color:#a9d6e5;margin:0 1.2rem;text-decoration:none}
-    nav a:hover{color:#f1faee}
-    main{max-width:720px;margin:2rem auto;padding:0 1.5rem}
-    .post{background:#151522;padding:1.3rem;margin-bottom:1.5rem;border-radius:6px}
-    .post h2{margin:0 0 0.4rem;color:#8ac926}
-    .post a{color:#8ac926;text-decoration:none}
-    .post a:hover{text-decoration:underline}
-    .date{color:#888;font-size:0.9em}
-    footer{text-align:center;margin-top:3rem;padding:1.2rem;color:#777;font-size:0.95rem;border-top:1px solid #222}
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0d0d12;
+      color: #e6e6ff;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    h1 {
+      color: #8ac926;
+      font-size: 2.2rem;
+    }
+    nav {
+      background: #12121f;
+      padding: 0.8rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      color: #a9d6e5;
+      text-decoration: none;
+      margin: 0 1.2rem;
+      font-weight: 600;
+    }
+    nav a:hover {
+      color: #f1faee;
+      text-decoration: underline;
+    }
+    main {
+      max-width: 760px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    .post {
+      background: #151522;
+      padding: 1.4rem;
+      margin-bottom: 1.8rem;
+      border-radius: 8px;
+      border-left: 3px solid #4cc9f0;
+    }
+    .post h2 {
+      margin: 0 0 0.5rem;
+    }
+    .post h2 a {
+      color: #8ac926;
+      text-decoration: none;
+    }
+    .post h2 a:hover {
+      text-decoration: underline;
+    }
+    .post .date {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+    .post p {
+      margin: 0.8rem 0;
+    }
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 1.2rem;
+      color: #777;
+      font-size: 0.95rem;
+      border-top: 1px solid #222;
+    }
+    @media (max-width: 600px) {
+      nav a { display: block; margin: 0.4rem 0; }
+      .post { padding: 1.2rem; }
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Invisible Builders Blog</h1>
+    <h1>Invisible Builders Blogroll</h1>
+    <p>Curated posts from privacy-focused builders across I2P and beyond</p>
   </header>
 
   <nav>
@@ -30,34 +96,40 @@
     <a href="blog.html">Blog</a>
   </nav>
 
-  <main id="posts-list">
-    <!-- Posts will be inserted here by JS -->
-    <p>Loading...</p>
+  <main>
+    <!-- External blog posts (manually maintained) -->
+    
+    <div class="post">
+      <span class="date">December 20, 2025</span>
+      <h2><a href="http://zzz.i2p/blog/browser-guide.html" target="_blank" rel="noopener">Getting Started with I2P Browsers</a></h2>
+      <p>A practical guide to configuring Firefox for safe I2P browsing. Covers proxy settings, security tips, and common pitfalls.</p>
+    </div>
+
+    <div class="post">
+      <span class="date">November 5, 2025</span>
+      <h2><a href="http://i2pwiki.i2p/en/Community/Ethos" target="_blank" rel="noopener">Why We Build Inside I2P</a></h2>
+      <p>Anonymity isn't just for hiding — it's the foundation of digital dignity. This manifesto explains our philosophy.</p>
+    </div>
+
+    <div class="post">
+      <span class="date">October 12, 2025</span>
+      <h2><a href="https://privacydev.net/i2p-eepsite-tutorial" target="_blank" rel="noopener">Hosting Your First Eepsite</a></h2>
+      <p>Step-by-step tutorial for deploying a static website on I2P using open-source tools. No coding required!</p>
+    </div>
+
+    <!-- Add new external post here -->
+    <!--
+    <div class="post">
+      <span class="date">[Date]</span>
+      <h2><a href="[URL]" target="_blank" rel="noopener">[Title]</a></h2>
+      <p>[Brief summary...]</p>
+    </div>
+    -->
+
   </main>
 
-  <footer>Use at your own risk.</footer>
-
-  <script>
-    // ✨ 博客清单（你只需在这里添加新文章！）
-    const posts = [
-      { file: 'post1.html', title: 'Getting Started with I2P Browsers', date: 'December 20, 2025' },
-      
-      // 添加新文章示例：
-      // { file: 'my-new-post.html', title: 'My New Post', date: 'December 24, 2025' }
-    ];
-
-    const list = document.getElementById('posts-list');
-    list.innerHTML = '';
-
-    posts.forEach(post => {
-      const div = document.createElement('div');
-      div.className = 'post';
-      div.innerHTML = `
-        <h2><a href="posts/${post.file}">${post.title}</a></h2>
-        <div class="date">${post.date}</div>
-      `;
-      list.appendChild(div);
-    });
-  </script>
+  <footer>
+    Use at your own risk.
+  </footer>
 </body>
 </html>
